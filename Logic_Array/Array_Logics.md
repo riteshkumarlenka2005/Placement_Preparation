@@ -83,7 +83,22 @@ return true;
 
 -compare arr[i]>arr[(i+1)%n], then count++, if count <=1 it is sorted and rotated, else no
 
-
+## 7. Reverse an array (Two pointer swap)
+- Use two pointers: `left` starting at the beginning (`0`) and `right` starting at the end (`N - 1`).
+- Swap the elements at `left` and `right`.
+- Increment `left` (`left++`) and decrement `right` (`right--`).
+- Repeat this process as long as `left < right`.
+```java
+// Core Logic
+int left = 0, right = n - 1;
+while (left < right) {
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    left++;
+    right--;
+}
+```
 
 ## 14. Find missing number in array [1 to N] (Sum formula)
 - Compute the expected sum of the first `N` natural numbers: `N * (N + 1) / 2`.
