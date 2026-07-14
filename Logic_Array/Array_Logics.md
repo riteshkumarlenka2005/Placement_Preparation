@@ -100,6 +100,24 @@ while (left < right) {
 }
 ```
 
+## 8. Remove duplicates from sorted array (in-place)
+- Use a pointer `i` to keep track of the index of the last unique element found. Initialize `i = 0`.
+- Iterate through the array with another pointer `j` from index `1` to `N - 1`.
+- Because the array is sorted, duplicates will be adjacent. If `arr[j] != arr[i]`, a new unique element is found.
+- Increment `i`, and overwrite `arr[i]` with `arr[j]`.
+- The total number of unique elements will be `i + 1`.
+```java
+// Core Logic
+int i = 0;
+for (int j = 1; j < n; j++) {
+    if (arr[j] != arr[i]) {
+        i++;
+        arr[i] = arr[j];
+    }
+}
+// New length of the unique elements is (i + 1)
+```
+
 ## 14. Find missing number in array [1 to N] (Sum formula)
 - Compute the expected sum of the first `N` natural numbers: `N * (N + 1) / 2`.
 - Compute the actual sum of the elements given.
