@@ -2,7 +2,7 @@ package DSA._01_Arrays;
 import java.util.*;
 
 
-public class LeftRotate_by_1_position_Left {
+public class LeftRotate_by_k_pos_left {
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter the size of the array:");
@@ -14,31 +14,25 @@ public class LeftRotate_by_1_position_Left {
             arr[i] = sc.nextInt();
          }
 
-         //rotate the array by 1 element left
-         int temp=arr[0];
+         System.out.println("Enter the number that how much element you want to rotate:");
+         int num=sc.nextInt();
+         num=num%size;
+         //rotate the array by k element left
+         for(int i=0;i<num;i++){
+            int temp=arr[0];
 
-         for(int i=0;i<size-1;i++){
-            arr[i] = arr[i+1];
+            for(int j=0;j<size-1;j++){
+                arr[j] = arr[j+1];
+            }
+            arr[size-1]=temp;
          }
-         arr[size-1]=temp;
+         
 
-         System.out.println("After 1 rotation left the array is:");
+         System.out.println("After left rotation the array would be:");
          for(int i=0;i<size;i++){
             System.out.print(arr[i]+" ");
          }
 
-
         sc.close();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
