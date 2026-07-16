@@ -41,7 +41,7 @@ import java.util.*;
 
 // Another approach Using Reversal Algorithm 
 
-// First reverse upto the element , that how many element we want top rotate 
+// First reverse upto the element , that how many element you want to rotate 
 // Then again reverse the rest elements or right side part 
 // Then reverse the complete array
 
