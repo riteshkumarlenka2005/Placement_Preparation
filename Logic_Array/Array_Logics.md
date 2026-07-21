@@ -133,4 +133,230 @@ for (int i = 0; i < n - 1; i++) {
 long missingNumber = expectedSum - actualSum;
 ```
 
+## 9. Find the third largest element (Single pass logic)
+- Track three variables: `largest`, `s_largest`, `t_largest` initialized to `Integer.MIN_VALUE`.
+- Traverse the array:
+  - If `arr[i] > largest`: Update all three (`t_largest = s_largest`, `s_largest = largest`, `largest = arr[i]`).
+  - Else if `arr[i] > s_largest` AND `arr[i] < largest`: Update two (`t_largest = s_largest`, `s_largest = arr[i]`).
+  - Else if `arr[i] > t_largest` AND `arr[i] < s_largest`: Update `t_largest = arr[i]`.
+```java
+// Core Logic
+int largest = Integer.MIN_VALUE, s_largest = Integer.MIN_VALUE, t_largest = Integer.MIN_VALUE;
+for (int i = 0; i < n; i++) {
+    if (arr[i] > largest) {
+        t_largest = s_largest;
+        s_largest = largest;
+        largest = arr[i];
+    } else if (arr[i] > s_largest && arr[i] < largest) {
+        t_largest = s_largest;
+        s_largest = arr[i];
+    } else if (arr[i] > t_largest && arr[i] < s_largest) {
+        t_largest = arr[i];
+    }
+}
+```
 
+## 10. Left Rotate by 1 position
+- Store the first element in a temporary variable (`temp = arr[0]`).
+- Shift all other elements one position to the left (`arr[i] = arr[i+1]`).
+- Place the temporary variable at the last index (`arr[n-1] = temp`).
+```java
+// Core Logic
+int temp = arr[0];
+for(int i = 0; i < n - 1; i++) {
+    arr[i] = arr[i + 1];
+}
+arr[n - 1] = temp;
+```
+
+## 11. Left Rotate by K positions (Reversal Algorithm)
+- Calculate effective rotations: `k = k % n`.
+- Reverse the first `k` elements: `reverse(arr, 0, k - 1)`.
+- Reverse the remaining `n - k` elements: `reverse(arr, k, n - 1)`.
+- Reverse the entire array: `reverse(arr, 0, n - 1)`.
+```java
+// Core Logic
+k = k % n;
+reverse(arr, 0, k - 1);
+reverse(arr, k, n - 1);
+reverse(arr, 0, n - 1);
+```
+
+## 12. Right Rotate by K positions (Reversal Algorithm)
+- Calculate effective rotations: `k = k % n`.
+- Reverse the first `n - k` elements: `reverse(arr, 0, n - k - 1)`.
+- Reverse the last `k` elements: `reverse(arr, n - k, n - 1)`.
+- Reverse the entire array: `reverse(arr, 0, n - 1)`.
+```java
+// Core Logic
+k = k % n;
+reverse(arr, 0, n - k - 1);
+reverse(arr, n - k, n - 1);
+reverse(arr, 0, n - 1);
+```
+
+## 13. Move all zeros to end (Two pointer approach)
+- Use a pointer `j` to track the position for the next non-zero element.
+- Traverse the array: if `arr[i] != 0`, place it at index `j` (`arr[j] = arr[i]`), and increment `j`.
+- After traversing, fill the rest of the array from `j` to `n - 1` with `0`.
+```java
+// Core Logic
+int j = 0;
+for(int i = 0; i < n; i++) {
+    if(arr[i] != 0) {
+        arr[j] = arr[i];
+        j++;
+    }
+}
+for(int i = j; i < n; i++) {
+    arr[i] = 0;
+}
+```
+
+## 15. Move negative numbers to one side
+- Use a pointer `j` to track the position of the last placed negative number.
+- Traverse the array. If the current element is negative (`arr[i] < 0`), swap it with the element at `j` and increment `j`.
+```java
+// Core Logic
+int j = 0;
+for(int i = 0; i < n; i++) {
+    if(arr[i] < 0) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        j++;
+    }
+}
+```
+
+## 16. Linear Search
+- Iterate through the array elements.
+- If `arr[i] == target`, the element is found at index `i`.
+```java
+// Core Logic
+for(int i = 0; i < n; i++) {
+    if(arr[i] == target) {
+        return i; // Found
+    }
+}
+return -1; // Not Found
+```
+
+## 17. Union of 2 Sorted Arrays (Two Pointers)
+- Use pointers `i` and `j` for both arrays.
+- Compare elements at `i` and `j`. Add the smaller element to the result list and increment its pointer.
+- If elements are equal, add any one and increment both pointers.
+- Ensure duplicates are not added by checking the last element of the result list.
+- Add remaining elements from both arrays.
+```java
+// Core Logic
+ArrayList<Integer> list = new ArrayList<>();
+int i = 0, j = 0;
+while(i < n1 && j < n2) {
+    if(arr1[i] < arr2[j]) {
+        if(list.isEmpty() || list.get(list.size() - 1) != arr1[i])
+            list.add(arr1[i]);
+        i++;
+    } else if (arr1[i] > arr2[j]) {
+        if(list.isEmpty() || list.get(list.size() - 1) != arr2[j])
+            list.add(arr2[j]);
+        j++;
+    } else {
+        if(list.isEmpty() || list.get(list.size() - 1) != arr1[i])
+            list.add(arr1[i]);
+        i++;
+        j++;
+    }
+}
+while (i < n1) {
+    if(list.isEmpty() || list.get(list.size() - 1) != arr1[i])
+        list.add(arr1[i]);
+    i++;
+}
+while (j < n2) {
+    if(list.isEmpty() || list.get(list.size() - 1) != arr2[j])
+        list.add(arr2[j]);
+    j++;
+}
+```
+
+## 18. Intersection of 2 Sorted Arrays (Two Pointers)
+- Use pointers `i` and `j`.
+- If `arr1[i] < arr2[j]`, increment `i`.
+- If `arr1[i] > arr2[j]`, increment `j`.
+- If they are equal, add to the result (avoid duplicates) and increment both `i` and `j`.
+```java
+// Core Logic
+ArrayList<Integer> list = new ArrayList<>();
+int i = 0, j = 0;
+while(i < n1 && j < n2) {
+    if(arr1[i] < arr2[j]) {
+        i++;
+    } else if(arr1[i] > arr2[j]) {
+        j++;
+    } else {
+        if(list.isEmpty() || list.get(list.size() - 1) != arr1[i]) {
+            list.add(arr1[i]);
+        }
+        i++;
+        j++;
+    }
+}
+```
+
+## 19. Max Consecutive Ones
+- Traverse the array. Maintain a `count` for current consecutive ones and `maxCount` for the maximum found so far.
+- If `arr[i] == 1`, increment `count` and update `maxCount`.
+- If `arr[i] != 1`, reset `count` to `0`.
+```java
+// Core Logic
+int count = 0, maxCount = 0;
+for(int i = 0; i < n; i++) {
+    if(arr[i] == 1) {
+        count++;
+        maxCount = Math.max(maxCount, count);
+    } else {
+        count = 0;
+    }
+}
+```
+
+## 20. Find single number (appears once, others twice)
+- **Optimal Approach (XOR)**: XOR of two same numbers is `0`. XOR of a number with `0` is the number itself.
+- XOR all elements in the array; the remaining value is the single number.
+```java
+// Core Logic
+int xor = 0;
+for(int i = 0; i < n; i++) {
+    xor = xor ^ arr[i];
+}
+return xor;
+```
+
+## 21. Majority Element (Appears > N/2 times)
+- **HashMap Approach**: Store frequency of each element. Iterate over map keys to find the element with frequency `> n / 2`.
+```java
+// Core Logic
+HashMap<Integer, Integer> map = new HashMap<>();
+for(int i = 0; i < n; i++) {
+    map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+}
+for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+    if(entry.getValue() > n / 2) return entry.getKey();
+}
+```
+
+## 22. Concatenation of 2 Arrays
+- Create a new array of size `size1 + size2`.
+- Copy all elements of the first array to the new array.
+- Copy all elements of the second array to the new array starting from index `size1`.
+```java
+// Core Logic
+int[] arr3 = new int[size1 + size2];
+for(int i = 0; i < size1; i++) {
+    arr3[i] = arr1[i];
+}
+for(int i = 0, j = 0; i < size2; i++, j++) {
+    arr3[size1 + i] = arr2[j];
+}
+```
