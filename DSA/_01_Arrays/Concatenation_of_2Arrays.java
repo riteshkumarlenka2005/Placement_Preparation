@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Concatenation_of_2Arrays {
 
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -42,7 +43,8 @@ public class Concatenation_of_2Arrays {
             arr3[i] = arr2[j];
         }
 
-        System.out.println("After concatenation the array is:");
+
+        System.out.println("After concatenation the array would be :");
 
         for (int i = 0; i < size3; i++) {
             System.out.print(arr3[i] + " ");
