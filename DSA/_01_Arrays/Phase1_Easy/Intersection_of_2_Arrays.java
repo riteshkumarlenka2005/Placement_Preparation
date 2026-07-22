@@ -1,4 +1,4 @@
-package DSA._01_Arrays;
+package DSA._01_Arrays.Phase1_Easy;
 
 import java.util.*;
 
