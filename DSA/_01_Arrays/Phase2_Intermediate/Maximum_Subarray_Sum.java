@@ -4,21 +4,103 @@ import java.util.*;
 
 
 // ----------------------- Brute Force Approach -----------------
+// public class Maximum_Subarray_Sum {
+
+//     public static int maxSubarraySum(int arr[]){
+
+//         // -------------- example ---- [1,-2,3,10,-4,7,2,-5]
+//         int maxSum=arr[0];
+//         for(int i=0;i<arr.length;i++){           // Outer loop is for Starting index
+//             for(int j=i;j<arr.length;j++){      //  Inner loop is for ending index
+//                 int sum=0;
+//                 for(int k=i;k<=j;k++){          //  this is for calculating sum of the sub array starting index to ending index
+//                     sum = sum + arr[k];
+                    
+//                 }
+//                 maxSum = Math.max(maxSum, sum);
+//             }
+//         }
+//         return maxSum;
+//     }
+//     public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
+//         System.out.println("Enter the size of the array: ");
+//         int size= sc.nextInt();
+        
+//         int arr[]=new int[size];
+//         System.out.println("Enter the elements into the array: ");
+//         for(int i=0;i<size;i++){
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int result = maxSubarraySum(arr);
+//         System.out.println("The Maximum SubArray Sum is "+result);
+
+
+//         sc.close();
+
+//     }
+// }
+
+
+
+// ---------  Better Solution ------------------
+
+// public class Maximum_Subarray_Sum {
+
+//     public static int maxSubarraySum(int arr[]){
+
+//         // -------------- example ---- [1,-2,3,10,-4,7,2,-5]
+//         int maxSum=arr[0];
+//         for(int i=0;i<arr.length;i++){    
+//             int sum=0;       // Outer loop is for Starting index
+//             for(int j=i;j<arr.length;j++){      //  Inner loop is for ending index
+//                 sum = sum + arr[j];
+                
+//                 maxSum = Math.max(maxSum, sum);
+//             }
+//         }
+//         return maxSum;
+//     }
+//     public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
+//         System.out.println("Enter the size of the array: ");
+//         int size= sc.nextInt();
+        
+//         int arr[]=new int[size];
+//         System.out.println("Enter the elements into the array: ");
+//         for(int i=0;i<size;i++){
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int result = maxSubarraySum(arr);
+//         System.out.println("The Maximum SubArray Sum is "+result);
+
+
+//         sc.close();
+
+//     }
+// }
+
+// ------------  Optimal Solution -------------
+
 public class Maximum_Subarray_Sum {
 
     public static int maxSubarraySum(int arr[]){
 
         // -------------- example ---- [1,-2,3,10,-4,7,2,-5]
         int maxSum=arr[0];
-        for(int i=0;i<arr.length;i++){
-            for(int j=i;j<arr.length;j++){
-                int sum=0;
-                for(int k=i;k<=j;k++){
-                    sum = sum + arr[k];
-                    
-                }
-                maxSum = Math.max(maxSum, sum);
+        int sum=0; 
+        for(int i=0;i<arr.length;i++){   
+            sum += arr[i];
+            
+            maxSum = Math.max(maxSum, sum);
+
+            if(sum<0){
+                sum =0;
             }
+                  
+           
         }
         return maxSum;
     }

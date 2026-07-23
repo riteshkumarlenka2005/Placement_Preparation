@@ -360,3 +360,116 @@ for(int i = 0, j = 0; i < size2; i++, j++) {
     arr3[size1 + i] = arr2[j];
 }
 ```
+
+## 23. Maximum Subarray Sum (Kadane's Algorithm)
+- Maintain two variables: `sum = 0` and `maxSum = arr[0]`.
+- Iterate through the array, adding the current element to `sum`.
+- Update `maxSum` if `sum > maxSum`.
+- If `sum` becomes less than `0`, reset `sum` to `0`.
+```java
+// Core Logic
+int maxSum = arr[0];
+int sum = 0; 
+for(int i = 0; i < arr.length; i++){   
+    sum += arr[i];
+    maxSum = Math.max(maxSum, sum);
+    if(sum < 0){
+        sum = 0;
+    }
+}
+```
+
+## 24. Find Numbers with Even Number of Digits
+- Iterate through the array elements.
+- For each element, count the number of digits by repeatedly dividing by `10` until it becomes `0`.
+- If the digit count is even, increment the `evenDigitCount`.
+```java
+// Core Logic
+int evenDigitCount = 0;
+for(int i = 0; i < n; i++) {
+    int digitCount = 0;
+    int temp = arr[i];
+    while(temp > 0) {
+        digitCount++;
+        temp /= 10;
+    }
+    if(digitCount % 2 == 0) {
+        evenDigitCount++;
+    }
+}
+```
+
+## 25. Plus One
+- Traverse the array from right to left (end to start).
+- If the current digit is less than `9`, increment it by `1` and return the array.
+- If it is `9`, set it to `0` and continue to the next digit.
+- If all digits were `9` (loop finishes), create a new array of size `n + 1`, set the first element to `1`, and return it.
+```java
+// Core Logic
+for(int i = digits.length - 1; i >= 0; i--) {
+    if(digits[i] < 9) {
+        digits[i] = digits[i] + 1;
+        return digits; // Returned inside method
+    }
+    digits[i] = 0;
+}
+int newArray[] = new int[digits.length + 1];
+newArray[0] = 1;
+return newArray; // Returned inside method
+```
+
+## 26. Remove Element (In-place)
+- Use a pointer `j` to keep track of the position for valid elements.
+- Iterate through the array. If the current element is not equal to `val`, place it at index `j` and increment `j`.
+- The first `j` elements will contain the array without `val`.
+```java
+// Core Logic
+int j = 0;
+for(int i = 0; i < nums.length; i++) {
+    if(nums[i] != val) {
+        nums[j] = nums[i];
+        j++;
+    }
+}
+// j is the new length
+```
+
+## 27. Richest Customer Wealth (2D Array)
+- Iterate through each row (customer) of the 2D array.
+- Calculate the sum of elements in the current row (wealth of the customer).
+- Keep track of the maximum wealth encountered so far.
+```java
+// Core Logic
+int maxWealth = 0;
+for(int i = 0; i < r; i++) {
+    int wealth = 0;         
+    for(int j = 0; j < c; j++) {
+        wealth += arr[i][j];
+    }
+    maxWealth = Math.max(maxWealth, wealth);
+}
+```
+
+## 28. Running Sum of 1D Array
+- Maintain a `sum` variable initialized to `0`.
+- Iterate through the array, adding the current element to `sum`.
+- Replace the current element with the updated `sum`.
+```java
+// Core Logic
+int sum = 0;
+for(int i = 0; i < size; i++) {
+    sum = sum + arr[i];
+    arr[i] = sum;
+}
+```
+
+## 29. Squares of a Sorted Array (Brute Force)
+- Iterate through the array and replace each element with its square.
+- Use `Arrays.sort()` to sort the updated array.
+```java
+// Core Logic
+for(int i = 0; i < arr.length; i++) {
+    arr[i] = arr[i] * arr[i];
+}
+Arrays.sort(arr);
+```
